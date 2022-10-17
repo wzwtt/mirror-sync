@@ -19,6 +19,7 @@ jobs:
         mkdir ~/.config/rclone/
         cp ~/secret/rclone/rclone.conf ~/.config/rclone/
         mkdir ~/google
+        sudo echo "user_allow_other" > /etc/fuse.conf
         nohup rclone mount google:/ ~/google  --umask 0000  --default-permissions  --allow-other  --transfers 4  --buffer-size 32M  --low-level-retries 200 &
         ls
 

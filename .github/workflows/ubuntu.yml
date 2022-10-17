@@ -14,7 +14,6 @@ jobs:
         
     - name: Preparing rclone
       run: |
-        rclone
         git clone https://${{ secrets.ACCESS_TOKEN }}@github.com/wzwtt/secret.git
         cd secret/rclone
         ls

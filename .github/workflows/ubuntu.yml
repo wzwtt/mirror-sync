@@ -1,1 +1,28 @@
+name: ubuntu
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+    
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Preparing environment
+      run: |
+        apt-get install rsync rclone
+        
+    - name: Preparing rclone
+      run: |
+        git clone https://${{ secrets.ACCESS_TOKEN }}@github.com/wzwtt/secret.git
+        cp ~/secret/rclone/rclone.conf ~/.config/rclone/
+        mkdir google
+        nohup rclone mount google:/ ~/google  --umask 0000  --default-permissions  --allow-non-empty  --allow-other  --transfers 4  --buffer-size 32M  --low-level-retries 200 &
+        ls
 
+    - name: syncing
+      run: |
+        rsync -avzP --delete-after archive.ubuntu.com::ubuntu/ ~/google/WebShared/mirrors/ubuntu/
+        
+        
+    

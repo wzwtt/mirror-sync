@@ -10,7 +10,7 @@ jobs:
     steps:
     - name: Preparing environment
       run: |
-        apt-get install rsync rclone
+        sudo apt-get install rsync rclone
         
     - name: Preparing rclone
       run: |
@@ -23,6 +23,6 @@ jobs:
     - name: syncing
       run: |
         rsync -avzP --delete-after archive.ubuntu.com::ubuntu/ ~/google/WebShared/mirrors/ubuntu/
-        
+
         
     

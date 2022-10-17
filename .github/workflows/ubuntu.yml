@@ -15,7 +15,7 @@ jobs:
     - name: Preparing rclone
       run: |
         git clone https://${{ secrets.ACCESS_TOKEN }}@github.com/wzwtt/secret.git
-        cd secret
+        cd secret/rclone
         ls
         cp ~/secret/rclone/rclone.conf ~/.config/rclone/
         mkdir google

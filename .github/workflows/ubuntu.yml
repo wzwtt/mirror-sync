@@ -18,7 +18,7 @@ jobs:
         ls
         mkdir ~/.config/rclone/
         cp ~/secret/rclone/rclone.conf ~/.config/rclone/
-        mkdir google
+        mkdir ~/google
         nohup rclone mount google:/ ~/google  --umask 0000  --default-permissions  --allow-non-empty  --allow-other  --transfers 4  --buffer-size 32M  --low-level-retries 200 &
         ls
 

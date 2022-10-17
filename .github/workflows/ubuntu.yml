@@ -14,10 +14,11 @@ jobs:
         
     - name: Preparing rclone
       run: |
+        rclone
         git clone https://${{ secrets.ACCESS_TOKEN }}@github.com/wzwtt/secret.git
         cd secret/rclone
         ls
-        cp ~/secret/rclone/rclone.conf ~/.config/rclone/
+        mv ~/secret/rclone/rclone.conf ~/.config/rclone/
         mkdir google
         nohup rclone mount google:/ ~/google  --umask 0000  --default-permissions  --allow-non-empty  --allow-other  --transfers 4  --buffer-size 32M  --low-level-retries 200 &
         ls

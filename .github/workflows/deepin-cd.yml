@@ -1,4 +1,4 @@
-name: ubuntu
+name: deepin-cd
 on:
   workflow_dispatch:
   schedule:
@@ -6,7 +6,7 @@ on:
     
 jobs:
   sync:
-    runs-on: deepin-cd
+    runs-on: ubuntu-latest
     steps:
     - name: Preparing environment
       run: |

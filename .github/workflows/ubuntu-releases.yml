@@ -23,6 +23,8 @@ jobs:
         mkdir ~/google
         nohup rclone mount google:/ ~/google  --umask 0000  --default-permissions  --allow-other  --transfers 4  --buffer-size 32M  --low-level-retries 200 &
         ls
+        sudo chown -R runner ~/google/WebShared/mirrors/ubuntu-releases
+        sudo chgrp -R runner ~/google/WebShared/mirrors/ubuntu-releases
     - name: syncing
       run: |
         rsync -avzP --delete-after rsync.releases.ubuntu.com::releases/ ~/google/WebShared/mirrors/ubuntu-releases/

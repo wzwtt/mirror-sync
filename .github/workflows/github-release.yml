@@ -2,7 +2,7 @@ name: github-release
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 14 * * *'
+    - cron: '0 2,14 * * *'
     
 jobs:
   sync:

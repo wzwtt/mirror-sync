@@ -28,4 +28,4 @@ jobs:
     - name: syncing
       run: |
         rsync -avzP rsync://rsync.releases.ubuntu.com/releases/	~/ubuntu-releases/
-        cp -ru ~/ubuntu-releases ~/google/WebShared/mirrors/ubuntu-releases/
+        cp -ru ~/ubuntu-releases ~/google/WebShared/mirrors/

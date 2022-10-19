@@ -23,6 +23,9 @@ jobs:
         mkdir ~/google
         nohup rclone mount google:/ ~/google  --umask 0000  --default-permissions  --allow-other  --transfers 4  --buffer-size 32M  --low-level-retries 200 &
         ls
+        sudo chown -R runner ~/google
+        sudo chgrp -R runner ~/google
     - name: syncing
       run: |
-        rsync -avzP --delete-after cdimage.ubuntukylin.com::releases/ ~/google/WebShared/mirrors/ubuntukylin-cdimage/
+        rsync -avzP rsync://cdimage.ubuntukylin.com/releases/	~/ubuntukylin-cdimage/
+        cp -Lvru ~/ubuntukylin-cdimage ~/google/WebShared/mirrors/

@@ -1,0 +1,41 @@
+name: github-release
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 14 * * *'
+    
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Preparing environment
+      run: |
+        sudo apt-get install rsync rclone
+        
+    - name: Preparing rclone
+      run: |
+        git clone https://${{ secrets.ACCESS_TOKEN }}@github.com/wzwtt/secret.git /home/runner/secret
+        ls
+        mkdir ~/.config/rclone/
+        cp ~/secret/rclone/rclone.conf ~/.config/rclone/
+        sudo rm /etc/fuse.conf
+        sudo cp ~/secret/rclone/fuse.conf /etc/fuse.conf
+        mkdir ~/google
+        nohup rclone mount google:/ ~/google  --umask 0000  --default-permissions  --allow-other  --transfers 4  --buffer-size 32M  --low-level-retries 200 &
+        ls
+        
+    - name: Preparing python
+      run: |
+        git clone https://github.com/SDU-Mirrors/github-release-downloader.git ~/github-release-downloader
+        cd ~/github-release-downloader
+        pip install -r requirements.txt
+        git clone https://github.com/wzwtt/mirror-sync.git ~/mirror-sync
+        
+    - name: syncing
+      run: |
+        export HTTP_BASIC_AUTH=wzwtt:${{ secrets.ACCESS_TOKEN }}
+        mkdir ~/github-release
+        cd ~/github-release-downloader
+        python main.py --repo-file ~/mirror-sync/repos.yaml --base-dir ~/github-release
+        cp -frp ~/github-release ~/google/WebShared/mirrors/github-release
+        

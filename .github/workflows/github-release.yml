@@ -37,5 +37,5 @@ jobs:
         mkdir ~/github-release
         cd ~/github-release-downloader
         python main.py --repo-file ~/mirror-sync/repos.yaml --base-dir ~/github-release
-        cp -frp ~/github-release ~/google/WebShared/mirrors/github-release
+        cp -frp ~/github-release ~/google/WebShared/mirrors
         

@@ -27,5 +27,11 @@ repos:
   - ethereum/solidity # 以太坊 Solidity 智能合约编译器
   - BluePointLilac/ContextMenuManager # Windows 右键菜单管理小工具
   - ShareX/ShareX # 截图工具
+  - rustdesk/rustdesk # 开源的远程控制软件
   - zbezj/HEU_KMS_Activator # Windows 激活神器，非开源
+  - SeaHOH/GotoX # SNI 修改工具
+  - dotnetcore/FastGithub # GitHub 加速工具
+  - 2dust/v2rayN # 适用于 Windows 平台的网络代理软件
+  - 2dust/v2rayNG # 适用于 Android 平台的网络代理软件
+  
   

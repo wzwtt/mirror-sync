@@ -34,3 +34,5 @@ repos:
   - topjohnwu/Magisk # Android 的 root 解决方案
   - VegaBobo/DSU-Sideloader # GSI 镜像侧载工具
   - ikarus23/MifareClassicTool # Android 手机上的 NFC 读写分析工具
+  - flybywiresim/installer # FlyByWire Simulations 安装器
+  - flybywiresim/a32nx # FlyByWire Simulations 的 Airbus A320neo 机模

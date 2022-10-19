@@ -31,5 +31,6 @@ repos:
   - 2dust/v2rayN # 适用于 Windows 平台的网络代理软件
   - 2dust/v2rayNG # 适用于 Android 平台的网络代理软件
   - musescore/MuseScore # 开源的音乐曲谱软件
-  
-  
+  - topjohnwu/Magisk # Android 的 root 解决方案
+  - VegaBobo/DSU-Sideloader # GSI 镜像侧载工具
+  - ikarus23/MifareClassicTool # Android 手机上的 NFC 读写分析工具

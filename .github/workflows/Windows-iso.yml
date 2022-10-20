@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         win: [10, 11]
-        lang: [Arabic, Brazilian Portuguese]
+        lang: [Arabic, Brazilian]
         arch: [x64]
     steps:
     - name: Preparing environment
@@ -570,7 +570,7 @@ jobs:
     strategy:
       matrix:
         win: [10, 11]
-        lang: [Russian, Serbian Latin]
+        lang: [Russian, Serbian]
         arch: [x64]
     steps:
     - name: Preparing environment

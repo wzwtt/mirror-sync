@@ -2,17 +2,16 @@ name: Windows-iso
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 2,14 * * *'
+    - cron: '0 0 1,15 * *'
     
 jobs:
-  sync every editions:
+  sync-every-editions:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         win: [10, 11]
         lang: [Arabic, Brazilian Portuguese, Bulgarian, Chinese (Simplified), Chinese (Traditional), Croatian, Czech, Danish, Dutch, English, English International, Estonian, Finnish, French, French Canadian, German, Greek, Hebrew, Hungarian, Italian, Japanese, Korean, Latvian, Lithuanian, Norwegian, Polish, Portuguese, Romanian, Russian, Serbian Latin, Slovak, Slovenian, Spanish, Spanish (Mexico), Swedish, Thai, Turkish, Ukrainian]
         arch: [x64, x86]
-    runs-on: ubuntu-latest
     steps:
     - name: Preparing environment
       run: |

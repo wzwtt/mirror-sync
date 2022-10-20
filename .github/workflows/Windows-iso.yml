@@ -1,0 +1,47 @@
+name: Windows-iso
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 2,14 * * *'
+    
+jobs:
+  sync every editions:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        win: [10, 11]
+        lang: [Arabic, Brazilian Portuguese, Bulgarian, Chinese (Simplified), Chinese (Traditional), Croatian, Czech, Danish, Dutch, English, English International, Estonian, Finnish, French, French Canadian, German, Greek, Hebrew, Hungarian, Italian, Japanese, Korean, Latvian, Lithuanian, Norwegian, Polish, Portuguese, Romanian, Russian, Serbian Latin, Slovak, Slovenian, Spanish, Spanish (Mexico), Swedish, Thai, Turkish, Ukrainian]
+        arch: [x64, x86]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Preparing environment
+      run: |
+        sudo apt-get install rclone
+        sudo apt-get install -y wget apt-transport-https software-properties-common
+        wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb"
+        sudo dpkg -i packages-microsoft-prod.deb
+        sudo apt-get update
+        sudo apt-get install -y powershell
+        
+    - name: Preparing rclone
+      run: |
+        git clone https://${{ secrets.ACCESS_TOKEN }}@github.com/wzwtt/secret.git /home/runner/secret
+        ls
+        mkdir ~/.config/rclone/
+        cp ~/secret/rclone/rclone.conf ~/.config/rclone/
+        sudo rm /etc/fuse.conf
+        sudo cp ~/secret/rclone/fuse.conf /etc/fuse.conf
+        mkdir ~/google
+        nohup rclone mount google:/ ~/google  --umask 0000  --default-permissions  --allow-other  --transfers 4  --buffer-size 32M  --low-level-retries 200 &
+        ls
+        
+    - name: Downloading Windows
+      run: |
+        git clone https://github.com/pbatard/Fido.git ~/Fido
+        cd ~/Fido
+        pwsh Fido.ps1 -Win ${{ matrix.win }} -Rel Latest -Lang ${{ matrix.lang }} -Arch ${{ matrix.arch }}
+        
+    - name: syncing
+      run: |
+        cp -vu ~/Fido/*.iso ~/google/WebShared/mirrors/Windows-iso/win${{ matrix.win }}/${{ matrix.lang }}
+        

@@ -170,7 +170,7 @@ jobs:
     strategy:
       matrix:
         win: [10, 11]
-        lang: [ Dutch, English]
+        lang: [Dutch, English]
         arch: [x64]
     steps:
     - name: Preparing environment

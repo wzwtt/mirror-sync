@@ -2,7 +2,7 @@ name: Windows-iso
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 1,15 * *'
+    - cron: '0 0 1,5,10,15,20,25,30 * *'
     
 jobs:
   sync-editions-1:

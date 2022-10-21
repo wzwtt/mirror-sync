@@ -25,4 +25,5 @@ jobs:
         ls
     - name: syncing
       run: |
-        rsync -avzP --delete-after rsync://asia.mirror.pkgbuild.com/packages/iso/ ~/google/WebShared/mirrors/archlinux-iso/
+        rsync -avzP rsync://asia.mirror.pkgbuild.com/packages/iso/	~/archlinux-iso/
+        cp -vru ~/archlinux-iso ~/google/WebShared/mirrors/

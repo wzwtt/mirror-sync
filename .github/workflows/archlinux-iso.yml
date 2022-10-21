@@ -1,0 +1,28 @@
+name: archlinux-iso
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 21 * * *'
+    
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Preparing environment
+      run: |
+        sudo apt-get install rsync rclone
+        
+    - name: Preparing rclone
+      run: |
+        git clone https://${{ secrets.ACCESS_TOKEN }}@github.com/wzwtt/secret.git /home/runner/secret
+        ls
+        mkdir ~/.config/rclone/
+        cp ~/secret/rclone/rclone.conf ~/.config/rclone/
+        sudo rm /etc/fuse.conf
+        sudo cp ~/secret/rclone/fuse.conf /etc/fuse.conf
+        mkdir ~/google
+        nohup rclone mount google:/ ~/google  --umask 0000  --default-permissions  --allow-other  --transfers 4  --buffer-size 32M  --low-level-retries 200 &
+        ls
+    - name: syncing
+      run: |
+        rsync -avzP --delete-after --bwlimit=10000 rsync://asia.mirror.pkgbuild.com/packages/iso/ ~/google/WebShared/mirrors/archlinux-iso/

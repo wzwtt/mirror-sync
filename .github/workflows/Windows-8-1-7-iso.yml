@@ -1,4 +1,4 @@
-name: Windows-iso
+name: Windows-8-1-7-iso
 on:
   workflow_dispatch:
     

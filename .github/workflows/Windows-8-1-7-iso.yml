@@ -1,6 +1,6 @@
 name: Windows-8-1-7-iso
 on:
-  workflow_dispatch
+  workflow_dispatch:
     
 jobs:
   sync-editions-1:
@@ -762,8 +762,7 @@ jobs:
       run: |
         cp -vu ~/Fido/*.iso ~/google/WebShared/mirrors/Windows-iso/win${{ matrix.win }}
         
- 
-   sync-editions-win7:
+  sync-editions-win7:
     runs-on: ubuntu-latest
     needs: sync-editions-19
     strategy:

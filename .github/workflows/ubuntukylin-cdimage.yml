@@ -28,4 +28,4 @@ jobs:
     - name: syncing
       run: |
         rsync -avzP rsync://cdimage.ubuntukylin.com/releases/	~/ubuntukylin-cdimage/
-        cp -Lvru ~/ubuntukylin-cdimage ~/google/WebShared/mirrors/
+        cp -vru ~/ubuntukylin-cdimage ~/google/WebShared/mirrors/

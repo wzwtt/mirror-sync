@@ -1,6 +1,6 @@
 name: Windows-8-1-7-iso
 on:
-  workflow_dispatch:
+  workflow_dispatch
     
 jobs:
   sync-editions-1:

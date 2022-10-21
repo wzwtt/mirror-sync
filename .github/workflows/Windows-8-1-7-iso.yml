@@ -799,6 +799,6 @@ jobs:
         
     - name: syncing
       run: |
-        cp -vu ~/Fido/*.iso ~/google/WebShared/mirrors/Windows-iso
+        cp -vu ~/Fido/*.iso ~/google/WebShared/mirrors/Windows-iso/win${{ matrix.win }}
         
         

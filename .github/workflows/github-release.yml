@@ -21,7 +21,7 @@ jobs:
         sudo rm /etc/fuse.conf
         sudo cp ~/secret/rclone/fuse.conf /etc/fuse.conf
         mkdir ~/google
-        nohup rclone mount google:/ ~/google  --umask 0000  --default-permissions  --allow-other  --transfers 4  --buffer-size 32M  --low-level-retries 200 &
+        nohup rclone mount google:/ ~/google  --umask 0000  --default-permissions  --allow-other  --attr-timeout 5m --vfs-cache-mode full --vfs-cache-max-age 6h --vfs-cache-max-size 10G --vfs-read-chunk-size-limit 100M  --buffer-size 300M &
         ls
         
     - name: Preparing python

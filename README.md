@@ -1,4 +1,5 @@
 # [镜像](https://drive.wzwtt.cf/mirrors/)同步管理器 [Mirrors](https://drive.wzwtt.cf/mirrors/) Synchronization Manager
+
 | 镜像名称 Mirror Name    | 描述 Description | 上游 Upstream | 当前同步状态<br>Current Sync Status  |
 | :----:        |    :----:   |         :----: |   :----:   |
 | [archlinux-iso](https://drive.wzwtt.cf/mirrors/archlinux-iso/) | Arch Linux 安装镜像<br> Installation image of Arch Linux | rsync://asia.mirror.pkgbuild.com/packages/iso/ | [![archlinux-iso](https://github.com/wzwtt/mirror-sync/actions/workflows/archlinux-iso.yml/badge.svg)](https://github.com/wzwtt/mirror-sync/actions/workflows/archlinux-iso.yml) |

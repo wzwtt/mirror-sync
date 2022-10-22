@@ -36,6 +36,6 @@ jobs:
         export HTTP_BASIC_AUTH=wzwtt:${{ secrets.ACCESS_TOKEN }}
         mkdir ~/github-release
         cd ~/github-release-downloader
-        python main.py --repo-file ~/mirror-sync/repos.yaml --base-dir ~/google/WebShared/mirrors/github-release
+        python main.py --repo-file ~/mirror-sync/repos.yaml --base-dir ~/google/WebShared/mirrors/github-release/
         
         

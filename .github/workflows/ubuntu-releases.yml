@@ -25,4 +25,4 @@ jobs:
         ls
     - name: syncing
       run: |
-        rsync -avzPL --delete-after rsync://rsync.releases.ubuntu.com/releases/	~/google/WebShared/mirrors/ubuntu-releases/
+        rsync -avzPL --exclude 'releases' --delete-after rsync://rsync.releases.ubuntu.com/releases/	~/google/WebShared/mirrors/ubuntu-releases/

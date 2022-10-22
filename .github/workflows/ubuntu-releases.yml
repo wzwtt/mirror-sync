@@ -27,5 +27,4 @@ jobs:
         sudo chgrp -R runner ~/google
     - name: syncing
       run: |
-        rsync -avzP rsync://rsync.releases.ubuntu.com/releases/	~/ubuntu-releases/
-        cp -vru ~/ubuntu-releases ~/google/WebShared/mirrors/
+        rsync -avzPL --delete-after rsync://rsync.releases.ubuntu.com/releases/	~/google/WebShared/mirrors/ubuntu-releases/

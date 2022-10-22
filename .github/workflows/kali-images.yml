@@ -25,4 +25,4 @@ jobs:
         ls
     - name: syncing
       run: |
-        rsync -avzP --delete-after rsync://ftp.nluug.nl/kali-images/ ~/google/WebShared/mirrors/kali-images/
+        rsync -avzPL --delete-after rsync://ftp.nluug.nl/kali-images/ ~/google/WebShared/mirrors/kali-images/

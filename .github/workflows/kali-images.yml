@@ -35,9 +35,15 @@ jobs:
         cd ~/google/WebShared/mirrors/kali-images/
         du -sh > ~/mirror-sync/totalsize/kali-images.txt
         cd ~/mirror-sync/
+        readme=$(cat README.md)
+        part1=${readme%%"kali-images.yml)|"*}"kali-images.yml)|"
+        echo "$part1"
+        tmp=${readme#*"kali-images.yml)|"}
+        part2="|"${tmp#*"|"}
+        echo
+        echo "$part2"
+        echo "${part1}$(cat ~/mirror-sync/totalsize/kali-images.txt)${part2}" > README.md
         git add *
         git commit -m "total size"
         git push
         wget https://purge.jsdelivr.net/gh/wzwtt/mirror-sync@main/totalsize/kali-images.txt
-        
-        

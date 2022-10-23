@@ -29,6 +29,8 @@ jobs:
 
     - name: Calculating mirror size
       run: |
+        git config --global user.email "wzwttol@outlook.com"
+        git config --global user.name "wzwtt"
         git clone https://${{ secrets.ACCESS_TOKEN }}@github.com/wzwtt/mirror-sync.git ~/mirror-sync
         cd ~/google/WebShared/mirrors/archlinux-iso/
         du -sh > ~/mirror-sync/totalsize/archlinux-iso.txt

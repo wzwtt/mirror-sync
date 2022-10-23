@@ -27,6 +27,7 @@ jobs:
       run: |
         rsync -avzPL --exclude 'releases' --exclude '.vanilla' --delete-after --ignore-errors rsync://rsync.releases.ubuntu.com/releases/	~/google/WebShared/mirrors/ubuntu-releases/
 
+
     - name: Calculating mirror size
       run: |
         git config --global user.email "wzwttol@outlook.com"
@@ -35,9 +36,15 @@ jobs:
         cd ~/google/WebShared/mirrors/ubuntu-releases/
         du -sh > ~/mirror-sync/totalsize/ubuntu-releases.txt
         cd ~/mirror-sync/
+        readme=$(cat README.md)
+        part1=${readme%%"ubuntu-releases.yml)|"*}"ubuntu-releases.yml)|"
+        echo "$part1"
+        tmp=${readme#*"ubuntu-releases.yml)|"}
+        part2="|"${tmp#*"|"}
+        echo
+        echo "$part2"
+        echo "${part1}$(cat ~/mirror-sync/totalsize/ubuntu-releases.txt)${part2}" > README.md
         git add *
         git commit -m "total size"
         git push
         wget https://purge.jsdelivr.net/gh/wzwtt/mirror-sync@main/totalsize/ubuntu-releases.txt
-        
-        

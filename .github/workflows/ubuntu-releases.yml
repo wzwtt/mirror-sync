@@ -26,3 +26,9 @@ jobs:
     - name: syncing
       run: |
         rsync -avzPL --exclude 'releases' --exclude '.vanilla' --delete-after --ignore-errors rsync://rsync.releases.ubuntu.com/releases/	~/google/WebShared/mirrors/ubuntu-releases/
+
+    - name: Calculating mirror size
+      run: |
+        cd ~/google/WebShared/mirrors/ubuntu-releases/
+        du -sh > totalsize.txt
+        

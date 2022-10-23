@@ -26,3 +26,9 @@ jobs:
     - name: syncing
       run: |
         rsync -avzPL --delete-after rsync://cdimage.ubuntukylin.com/releases/	~/google/WebShared/mirrors/ubuntukylin-cdimage/
+
+    - name: Calculating mirror size
+      run: |
+        cd ~/google/WebShared/mirrors/ubuntukylin-cdimage/
+        du -sh > totalsize.txt
+        

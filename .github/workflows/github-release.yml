@@ -42,7 +42,7 @@ jobs:
       run: |
         git config --global user.email "wzwttol@outlook.com"
         git config --global user.name "wzwtt"
-        git clone https://${{ secrets.ACCESS_TOKEN }}@github.com/wzwtt/mirror-sync.git ~/mirror-sync
+        git clone https://${{ secrets.ACCESS_TOKEN }}@github.com/wzwtt/mirror-sync.git ~/mirror-sync/
         cd ~/google/WebShared/mirrors/github-release/
         du -sh >> ~/mirror-sync/totalsize/github-release.txt
         size=$(du -sh)

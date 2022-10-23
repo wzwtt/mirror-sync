@@ -44,7 +44,8 @@ jobs:
         git config --global user.name "wzwtt"
         git clone https://${{ secrets.ACCESS_TOKEN }}@github.com/wzwtt/mirror-sync.git ~/mirror-sync
         cd ~/google/WebShared/mirrors/github-release/
-        du -sh > ~/mirror-sync/totalsize/github-release.txt
+        du -sh >> ~/mirror-sync/totalsize/github-release.txt
+        size=$(du -sh)
         cd ~/mirror-sync/
         readme=$(cat README.md)
         part1=${readme%%"github-release.yml)|"*}"github-release.yml)|"
@@ -53,7 +54,7 @@ jobs:
         part2="|"${tmp#*"|"}
         echo
         echo "$part2"
-        echo "${part1}$(cat ~/mirror-sync/totalsize/github-release.txt)${part2}" > README.md
+        echo "${part1}${size}${part2}" > README.md
         git add *
         git commit -m "total size"
         git push

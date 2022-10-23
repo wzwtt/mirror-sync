@@ -35,6 +35,14 @@ jobs:
         cd ~/google/WebShared/mirrors/deepin-cd/
         du -sh > ~/mirror-sync/totalsize/deepin-cd.txt
         cd ~/mirror-sync/
+        readme=$(cat README.md)
+        part1=${readme%%"deepin-cd.yml)|"*}"deepin-cd.yml)|"
+        echo "$part1"
+        tmp=${readme#*"deepin-cd.yml)|"}
+        part2="|"${tmp#*"|"}
+        echo
+        echo "$part2"
+        echo "${part1}$(cat ~/mirror-sync/totalsize/deepin-cd.txt)${part2}" > README.md
         git add *
         git commit -m "total size"
         git push

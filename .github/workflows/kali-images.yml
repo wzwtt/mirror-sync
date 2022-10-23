@@ -29,6 +29,15 @@ jobs:
 
     - name: Calculating mirror size
       run: |
+        git config --global user.email "wzwttol@outlook.com"
+        git config --global user.name "wzwtt"
+        git clone https://${{ secrets.ACCESS_TOKEN }}@github.com/wzwtt/mirror-sync.git ~/mirror-sync
         cd ~/google/WebShared/mirrors/kali-images/
-        du -sh > totalsize.txt
+        du -sh > ~/mirror-sync/totalsize/kali-images.txt
+        cd ~/mirror-sync/
+        git add *
+        git commit -m "total size"
+        git push
+        wget https://purge.jsdelivr.net/gh/wzwtt/mirror-sync@main/totalsize/kali-images.txt
+        
         

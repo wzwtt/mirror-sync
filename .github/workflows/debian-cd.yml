@@ -35,8 +35,15 @@ jobs:
         cd ~/google/WebShared/mirrors/debian-cd/
         du -sh > ~/mirror-sync/totalsize/debian-cd.txt
         cd ~/mirror-sync/
+        readme=$(cat README.md)
+        part1=${readme%%"debian-cd.yml)|"*}"debian-cd.yml)|"
+        echo "$part1"
+        tmp=${readme#*"debian-cd.yml)|"}
+        part2="|"${tmp#*"|"}
+        echo
+        echo "$part2"
+        echo "${part1}$(cat ~/mirror-sync/totalsize/debian-cd.txt)${part2}" > README.md
         git add *
         git commit -m "total size"
         git push
         wget https://purge.jsdelivr.net/gh/wzwtt/mirror-sync@main/totalsize/debian-cd.txt
-  

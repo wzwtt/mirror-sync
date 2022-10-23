@@ -26,3 +26,9 @@ jobs:
     - name: syncing
       run: |
         rsync -avzPL --delete-after rsync://ftp.halifax.rwth-aachen.de/kali-images/ ~/google/WebShared/mirrors/kali-images/
+
+    - name: Calculating mirror size
+      run: |
+        cd ~/google/WebShared/mirrors/kali-images/
+        du -sh > totalsize.txt
+        

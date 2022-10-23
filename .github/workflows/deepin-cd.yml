@@ -26,3 +26,7 @@ jobs:
     - name: syncing
       run: |
         rsync -avzP --delete-after rsync.deepin.com::releases/ ~/google/WebShared/mirrors/deepin-cd/
+    - name: Calculating mirror size
+      run: |
+        cd ~/google/WebShared/mirrors/deepin-cd/
+        du -sh > totalsize.txt

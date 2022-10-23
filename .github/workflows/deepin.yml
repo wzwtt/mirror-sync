@@ -1,0 +1,50 @@
+name: deepin
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 22 * * *'
+    
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Preparing environment
+      run: |
+        sudo apt-get install rsync rclone
+        
+    - name: Preparing rclone
+      run: |
+        git clone https://${{ secrets.ACCESS_TOKEN }}@github.com/wzwtt/secret.git /home/runner/secret
+        ls
+        mkdir ~/.config/rclone/
+        cp ~/secret/rclone/rclone.conf ~/.config/rclone/
+        sudo rm /etc/fuse.conf
+        sudo cp ~/secret/rclone/fuse.conf /etc/fuse.conf
+        mkdir ~/google
+        nohup rclone mount google:/ ~/google  --umask 0000  --default-permissions  --allow-other  --attr-timeout 5m --vfs-cache-mode full --vfs-cache-max-age 6h --vfs-cache-max-size 10G --vfs-read-chunk-size-limit 100M  --buffer-size 300M &
+        ls
+    - name: syncing
+      run: |
+        rsync -avzPL --delete-after rsync.deepin.com::deepin/ ~/google/WebShared/mirrors/deepin/
+        
+    - name: Calculating mirror size
+      run: |
+        git config --global user.email "wzwttol@outlook.com"
+        git config --global user.name "wzwtt"
+        git clone https://${{ secrets.ACCESS_TOKEN }}@github.com/wzwtt/mirror-sync.git ~/mirror-sync
+        cd ~/google/WebShared/mirrors/deepin/
+        du -sh >> ~/mirror-sync/totalsize/deepin.txt
+        size=$(du -sh)
+        cd ~/mirror-sync/
+        readme=$(cat README.md)
+        part1=${readme%%"deepin.yml)|"*}"deepin.yml)|"
+        echo "$part1"
+        tmp=${readme#*"deepin.yml)|"}
+        part2="|"${tmp#*"|"}
+        echo
+        echo "$part2"
+        echo "${part1}${size}${part2}" > README.md
+        git add *
+        git commit -m "total size"
+        git push
+        wget https://purge.jsdelivr.net/gh/wzwtt/mirror-sync@main/totalsize/deepin.txt

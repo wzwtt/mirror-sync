@@ -1532,8 +1532,15 @@ jobs:
         cd ~/google/WebShared/mirrors/Windows-iso/
         du -sh > ~/mirror-sync/totalsize/Windows-iso.txt
         cd ~/mirror-sync/
+        readme=$(cat README.md)
+        part1=${readme%%"Windows-iso.yml)|"*}"Windows-iso.yml)|"
+        echo "$part1"
+        tmp=${readme#*"Windows-iso.yml)|"}
+        part2="|"${tmp#*"|"}
+        echo
+        echo "$part2"
+        echo "${part1}$(cat ~/mirror-sync/totalsize/Windows-iso.txt)${part2}" > README.md
         git add *
         git commit -m "total size"
         git push
         wget https://purge.jsdelivr.net/gh/wzwtt/mirror-sync@main/totalsize/Windows-iso.txt
-        

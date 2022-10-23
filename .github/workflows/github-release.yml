@@ -38,4 +38,9 @@ jobs:
         cd ~/github-release-downloader
         python main.py --repo-file ~/mirror-sync/repos.yaml --base-dir ~/google/WebShared/mirrors/github-release/
         
+    - name: Calculating mirror size
+      run: |
+        cd ~/google/WebShared/mirrors/github-release/
+        du -sh > totalsize.txt
+        
         

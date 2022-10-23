@@ -38,5 +38,6 @@ jobs:
         git add *
         git commit -m "total size"
         git push
+        wget https://purge.jsdelivr.net/gh/wzwtt/mirror-sync@main/totalsize/archlinux-iso.txt
   
         

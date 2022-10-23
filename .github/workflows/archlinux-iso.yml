@@ -26,3 +26,8 @@ jobs:
     - name: syncing
       run: |
         rsync -avzPL --delete-after rsync://geo.mirror.pkgbuild.com/packages/iso/ ~/google/WebShared/mirrors/archlinux-iso/
+    - name: Calculating mirror size
+      run: |
+        cd ~/google/WebShared/mirrors/archlinux-iso/
+        du -sh > totalsize.txt
+        

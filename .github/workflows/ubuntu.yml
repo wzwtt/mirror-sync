@@ -25,7 +25,7 @@ jobs:
         ls
     - name: syncing
       run: |
-        rsync -avzL --delete-after rsync://archive.ubuntu.com/ubuntu/	~/google/WebShared/mirrors/ubuntu/
+        rsync -avzPL --delete-after rsync://archive.ubuntu.com/ubuntu/	~/google/WebShared/mirrors/ubuntu/
 
     - name: Calculating mirror size
       run: |

@@ -25,7 +25,7 @@ jobs:
         ls
     - name: syncing
       run: |
-        rsync -avzL --delete-after rsync.deepin.com::deepin/ ~/google/WebShared/mirrors/deepin/
+        rsync -avzL --delete-after mirrors.kernel.org::deepin/ ~/google/WebShared/mirrors/deepin/
         
     - name: Calculating mirror size
       run: |

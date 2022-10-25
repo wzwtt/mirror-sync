@@ -25,7 +25,7 @@ jobs:
         ls
     - name: syncing
       run: |
-        rsync -avzPL --delete-after rsync://mirrors.kernel.org/debian-cd/ ~/google/WebShared/mirrors/debian-cd/
+        rsync -avzPL --delete-after rsync://cdimage.debian.org/debian-cd/ ~/google/WebShared/mirrors/debian-cd/
 
     - name: Calculating mirror size
       run: |

@@ -2,7 +2,7 @@ name: termux
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0,12 * * *'
+    - cron: '0 0,6,12,18 * * *'
     
 jobs:
   sync:
@@ -10,7 +10,7 @@ jobs:
     steps:
     - name: Preparing environment
       run: |
-        sudo apt-get install rsync rclone apt-mirror
+        sudo apt-get install rsync rclone
         
     - name: Preparing rclone
       run: |
@@ -23,16 +23,14 @@ jobs:
         mkdir ~/google
         nohup rclone mount google:/ ~/google  --umask 0000  --default-permissions  --allow-other  --attr-timeout 5m --vfs-cache-mode full --vfs-cache-max-age 6h --vfs-cache-max-size 10G --vfs-read-chunk-size-limit 100M  --buffer-size 300M &
         ls
-        git clone https://${{ secrets.ACCESS_TOKEN }}@github.com/wzwtt/mirror-sync.git ~/mirror-sync
     - name: syncing
       run: |
-        sudo apt-mirror ~/mirror-sync/termux.list
+        RSYNC_PASSWORD=termuxmirror rsync -azPL --delete rsync@grimler.se::termux ~/google/WebShared/mirrors/termux/
 
     - name: Calculating mirror size
       run: |
         git config --global user.email "wzwttol@outlook.com"
         git config --global user.name "wzwtt"
-        rm -r ~/mirror-sync
         git clone https://${{ secrets.ACCESS_TOKEN }}@github.com/wzwtt/mirror-sync.git ~/mirror-sync
         cd ~/google/WebShared/mirrors/termux/
         du -sh >> ~/mirror-sync/totalsize/termux.txt

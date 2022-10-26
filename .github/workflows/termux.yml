@@ -25,7 +25,7 @@ jobs:
         ls
     - name: syncing
       run: |
-        RSYNC_PASSWORD=termuxmirror rsync -avzPL --delete rsync@grimler.se::termux ~/google/WebShared/mirrors/termux/
+        RSYNC_PASSWORD=termuxmirror rsync -a --delete rsync@grimler.se::termux ~/google/WebShared/mirrors/termux/
 
     - name: Calculating mirror size
       run: |

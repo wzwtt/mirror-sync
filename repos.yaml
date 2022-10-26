@@ -36,3 +36,4 @@ repos:
   - ikarus23/MifareClassicTool # Android 手机上的 NFC 读写分析工具
   - flybywiresim/installer # FlyByWire Simulations 安装器
   - flybywiresim/a32nx # FlyByWire Simulations 的 Airbus A320neo 机模
+  - termux/termux-app # Android 平台的终端模拟器

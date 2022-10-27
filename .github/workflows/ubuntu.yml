@@ -34,8 +34,9 @@ jobs:
       
     - name: syncing
       run: |
+        chmod 777 ~/distrib
         cd ~/distrib/bin
-        ftpsync sync:archive:ubuntu
+        ./ftpsync sync:archive:ubuntu
 
     - name: Calculating mirror size
       run: |

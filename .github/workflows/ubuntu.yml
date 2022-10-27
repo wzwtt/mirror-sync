@@ -10,7 +10,7 @@ jobs:
     steps:
     - name: Preparing environment
       run: |
-        sudo apt-get install rsync rclone
+        sudo apt-get install rsync rclone awscli stunnel4 socat
         
     - name: Preparing rclone
       run: |
@@ -23,9 +23,19 @@ jobs:
         mkdir ~/google
         nohup rclone mount google:/ ~/google  --umask 0000  --default-permissions  --allow-other  --attr-timeout 5m --vfs-cache-mode full --vfs-cache-max-age 6h --vfs-cache-max-size 10G --vfs-read-chunk-size-limit 100M  --buffer-size 300M &
         ls
+        
+    - name: Preparing ftpsync
+      run: |
+        cd ~
+        wget https://ftp-master.debian.org/ftpsync.tar.gz
+        tar -zxvf ftpsync.tar.gz
+        cd distrib/etc
+        wget https://raw.githubusercontent.com/wzwtt/mirror-sync/main/config/ftpsync-ubuntu.conf
+      
     - name: syncing
       run: |
-        rsync -azPL --delete-after --ignore-errors rsync://archive.ubuntu.com/ubuntu/	~/google/WebShared/mirrors/ubuntu/
+        cd ~/distrib/bin
+        ftpsync sync:archive:ubuntu
 
     - name: Calculating mirror size
       run: |
@@ -34,7 +44,7 @@ jobs:
         git clone https://${{ secrets.ACCESS_TOKEN }}@github.com/wzwtt/mirror-sync.git ~/mirror-sync
         cd ~/google/WebShared/mirrors/ubuntu/
         du -sh >> ~/mirror-sync/totalsize/ubuntu.txt
-        size=$(du -sh)
+        size=$(cat ~/mirror-sync/totalsize/ubuntu.txt)
         cd ~/mirror-sync/
         readme=$(cat README.md)
         part1=${readme%%"ubuntu.yml)|"*}"ubuntu.yml)|"

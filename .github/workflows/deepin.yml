@@ -34,7 +34,7 @@ jobs:
         git clone https://${{ secrets.ACCESS_TOKEN }}@github.com/wzwtt/mirror-sync.git ~/mirror-sync
         cd ~/google/WebShared/mirrors/deepin/
         du -sh >> ~/mirror-sync/totalsize/deepin.txt
-        size=$(du -sh)
+        size=$(cat ~/mirror-sync/totalsize/deepin.txt | awk 'END {print}')
         cd ~/mirror-sync/
         readme=$(cat README.md)
         part1=${readme%%"deepin.yml)|"*}"deepin.yml)|"

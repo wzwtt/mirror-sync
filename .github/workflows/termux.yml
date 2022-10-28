@@ -34,7 +34,7 @@ jobs:
         git clone https://${{ secrets.ACCESS_TOKEN }}@github.com/wzwtt/mirror-sync.git ~/mirror-sync
         cd ~/google/WebShared/mirrors/termux/
         du -sh >> ~/mirror-sync/totalsize/termux.txt
-        size=$(cat ~/mirror-sync/totalsize/termux.txt)
+        size=$(cat ~/mirror-sync/totalsize/termux.txt | awk 'END {print}')
         cd ~/mirror-sync/
         readme=$(cat README.md)
         part1=${readme%%"termux.yml)|"*}"termux.yml)|"

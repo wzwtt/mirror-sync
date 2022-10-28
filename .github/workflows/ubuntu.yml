@@ -45,7 +45,7 @@ jobs:
         git clone https://${{ secrets.ACCESS_TOKEN }}@github.com/wzwtt/mirror-sync.git ~/mirror-sync
         cd ~/google/WebShared/mirrors/ubuntu/
         du -sh >> ~/mirror-sync/totalsize/ubuntu.txt
-        size=$(cat ~/mirror-sync/totalsize/ubuntu.txt)
+        size=$(cat ~/mirror-sync/totalsize/ubuntu.txt | awk 'END {print}')
         cd ~/mirror-sync/
         readme=$(cat README.md)
         part1=${readme%%"ubuntu.yml)|"*}"ubuntu.yml)|"

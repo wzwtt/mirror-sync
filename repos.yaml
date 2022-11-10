@@ -37,3 +37,4 @@ repos:
   - flybywiresim/installer # FlyByWire Simulations 安装器
   - flybywiresim/a32nx # FlyByWire Simulations 的 Airbus A320neo 机模
   - termux/termux-app # Android 平台的终端模拟器
+  - NickeManarin/ScreenToGif # Gif 录屏工具
